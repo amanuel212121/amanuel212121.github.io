@@ -1,30 +1,195 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Portfolio</title>
+    <title>Amanuel Portfolio</title>
+
     <style>
         body {
-            background-color: #0f172a;
-            color: white;
-            text-align: center;
+            margin: 0;
             font-family: Arial;
+            color: white;
+            background: linear-gradient(-45deg, #0f172a, #1e3a8a, #0f172a, #0ea5e9);
+            background-size: 400% 400%;
+            animation: bg 10s infinite;
+            transition: 0.5s;
         }
+
+        @keyframes bg {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
+        header {
+            text-align: center;
+            padding: 40px;
+        }
+
         h1 {
             color: #38bdf8;
         }
+
+        .profile {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        nav a {
+            margin: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        section {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(0,0,0,0.4);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: 0.6s;
+        }
+
+        .card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            background: #38bdf8;
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #0ea5e9;
+        }
+
+        /* LIGHT MODE */
+        .light {
+            background: white;
+            color: black;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px;
+        }
     </style>
 </head>
+
 <body>
+
+<header>
     <h1>Hello, I'm Amanuel 👋</h1>
-    <p>Software Developer | Java | Web</p>
 
-    <h2>About Me</h2>
-    <p>I am a student and developer...</p>
+    <!-- PROFILE IMAGE -->
+    <img class="profile" src="https://i.pravatar.cc/150?img=12">
 
-    <h2>Projects</h2>
-    <p>Hotel Management System</p>
+    <!-- TYPING TEXT -->
+    <h2 id="typing"></h2>
 
-    <h2>Contact</h2>
-    <p>Email: your@email.com</p>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <br>
+
+    <!-- DARK/LIGHT BUTTON -->
+    <button class="btn" onclick="toggleMode()">🌙 Toggle Mode</button>
+</header>
+
+<section id="about">
+    <div class="card">
+        <h2>About Me</h2>
+        I am a passionate software developer who builds systems using Java and web technologies.
+    </div>
+</section>
+
+<section id="projects">
+    <div class="card">
+        <h2>Projects Gallery</h2>
+
+        <p>🏨 Hotel Management System</p>
+        <img src="hotel.png" width="200">
+
+        <p>🏦 Bank Management System</p>
+        <img src="bank.png" width="200">
+    </div>
+</section>
+
+<section id="login">
+    <div class="card">
+        <h2>Login Page</h2>
+        <input placeholder="Username"><br>
+        <input type="password" placeholder="Password"><br>
+        <button class="btn">Login</button>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="card">
+        <h2>Contact</h2>
+        <p>Email: amanuelhibstu@gmail.com</p>
+
+        <a class="btn" href="https://wa.me/251966109153" target="developer">💬 WhatsApp</a>
+        <a class="btn" href="mailto:amanuelhibstu@gmail.com">📧 Email</a>
+    </div>
+</section>
+
+<footer>
+    © 2026 Amanuel Portfolio
+</footer>
+
+<script>
+    // typing effect
+    const text = "Software Developer | Java | Web Developer";
+    let i = 0;
+
+    function type() {
+        if (i < text.length) {
+            document.getElementById("typing").innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, 80);
+        }
+    }
+    type();
+
+    // dark/light mode
+    function toggleMode() {
+        document.body.classList.toggle("light");
+    }
+
+    // scroll animation
+    window.addEventListener("scroll", () => {
+        document.querySelectorAll(".card").forEach(c => {
+            let pos = c.getBoundingClientRect().top;
+            if (pos < window.innerHeight - 100) {
+                c.classList.add("show");
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
